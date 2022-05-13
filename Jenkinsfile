@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh "echo ${param.theparam}"
+                sh "echo ${params.theparam}"
             }
         }
     }
