@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-echo-dep
+spec:
+  selector:
+    matchLabels:
+      app: my-echo
+  replicas: 3
+  template:
+    metadata:
+      name: my-echo
+      labels:
+        app: my-echo
+    spec:
+      containers:
+      - name: echo-container
+        image: mikhailgostev/echo
+        ports:
+        - containerPort: 8080
+          name: http-web-svc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: censor-dep
+spec:
+  selector:
+    matchLabels:
+      app: censor
+  replicas: 1
+  template:
+    metadata:
+      name: censor
+      labels:
+        app: censor
+    spec:
+      containers:
+      - name: censor-container
+        image: mikhailgostev/censor
+        ports:
+        - containerPort: 8080
+          name: http-web-svc
